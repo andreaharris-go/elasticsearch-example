@@ -51,13 +51,11 @@ app.get('/search', async (req, res) => {
   try {
     const result = await client.search({
       index: 'movies',
-      body: {
-        query: {
-          multi_match: {
-            query: q,
-            fields: ['title', 'description'],
-            fuzziness: 'AUTO'
-          }
+      query: {
+        multi_match: {
+          query: q,
+          fields: ['title', 'description'],
+          fuzziness: 'AUTO'
         }
       }
     });

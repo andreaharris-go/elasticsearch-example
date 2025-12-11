@@ -127,29 +127,27 @@ async function seedData() {
     console.log('Creating "movies" index...');
     await client.indices.create({
       index: 'movies',
-      body: {
-        mappings: {
-          properties: {
-            title: { type: 'text' },
-            description: { type: 'text' },
-            genre: { type: 'keyword' }
-          }
+      mappings: {
+        properties: {
+          title: { type: 'text' },
+          description: { type: 'text' },
+          genre: { type: 'keyword' }
         }
       }
     });
     console.log('✓ Index created');
 
-    // Insert movies
+    // Insert movies using bulk API for better performance
     console.log(`Inserting ${movies.length} movies...`);
-    for (const movie of movies) {
-      await client.index({
-        index: 'movies',
-        body: movie
-      });
-    }
+    const bulkOperations = movies.flatMap(movie => [
+      { index: { _index: 'movies' } },
+      movie
+    ]);
 
-    // Refresh index to make documents searchable immediately
-    await client.indices.refresh({ index: 'movies' });
+    await client.bulk({
+      operations: bulkOperations,
+      refresh: true
+    });
     console.log('✓ All movies inserted and index refreshed');
 
     // Verify insertion

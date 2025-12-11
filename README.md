@@ -62,10 +62,16 @@ npm install
 
 ### Step 3: Seed the Database
 
-Populate Elasticsearch with 20 sample movies:
+Populate Elasticsearch with sample movies:
 
+**Option 1: English movies (20 records)**
 ```bash
 npm run seed
+```
+
+**Option 2: Thai movies (100 records)**
+```bash
+npm run seed:thai
 ```
 
 You should see output confirming the data was inserted successfully.
@@ -142,6 +148,13 @@ Search by description keywords:
 curl "http://localhost:3000/search?q=batman"
 ```
 
+**For Thai data**, search in Thai:
+```bash
+curl "http://localhost:3000/search?q=ผี"        # Search for ghost/horror movies
+curl "http://localhost:3000/search?q=รัก"       # Search for love/romance
+curl "http://localhost:3000/search?q=ดราม่า"    # Search for drama genre
+```
+
 Search for multiple words:
 ```bash
 curl "http://localhost:3000/search?q=space+journey"
@@ -211,10 +224,17 @@ npm run seed
 
 ## 📚 Sample Data
 
-The seed script populates 20 popular movies with:
+The repository includes two seed scripts:
+
+**English Movies (`seed.js`)**: 20 popular movies with:
 - **Title:** Movie name
 - **Description:** Plot summary
 - **Genre:** Movie category (Drama, Crime, Sci-Fi, etc.)
+
+**Thai Movies (`seed-thai.js`)**: 100 Thai movies with:
+- **Title (ชื่อเรื่อง):** Thai movie name
+- **Description (เรื่องย่อ):** Thai plot summary
+- **Genre (ประเภท):** Thai movie category (ดราม่า, สยองขวัญ, โรแมนติก, etc.)
 
 ## 🤝 Contributing
 

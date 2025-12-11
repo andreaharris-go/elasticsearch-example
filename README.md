@@ -32,7 +32,9 @@ A complete demo project showcasing Elasticsearch as a search engine with a Node.
 Run the Docker containers:
 
 ```bash
-docker-compose up -d
+docker compose up -d
+# Or if using older Docker versions:
+# docker-compose up -d
 ```
 
 This will start:
@@ -42,7 +44,8 @@ This will start:
 Wait for the services to be healthy (approximately 30-60 seconds). You can check the status with:
 
 ```bash
-docker-compose ps
+docker compose ps
+# Or: docker-compose ps
 ```
 
 Or verify Elasticsearch is running:
@@ -167,14 +170,17 @@ GET /movies/_search
 ### Stop the Services
 
 ```bash
-docker-compose down
+docker compose down
+# Or: docker-compose down
 ```
 
 ### View Logs
 
 ```bash
-docker-compose logs -f elasticsearch
-docker-compose logs -f kibana
+docker compose logs -f elasticsearch
+docker compose logs -f kibana
+# Or: docker-compose logs -f elasticsearch
+# Or: docker-compose logs -f kibana
 ```
 
 ### Reseed the Database
